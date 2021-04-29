@@ -20,7 +20,7 @@ class Ventana extends JFrame{
 	JMenu alumnos;
 	JMenuItem altas,bajas,cambios,consultas;
 	JToolBar barraH;
-	JPanel panel1,panel2;
+	JPanel panel1,panel2,panel3,panel4;
 	
 	JInternalFrame a,b,c,c1;
 	
@@ -69,6 +69,26 @@ class Ventana extends JFrame{
 							
 				}
 			});
+		
+		cambios.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				c.setVisible(true);
+							
+							
+				}
+			});
+		
+		consultas.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				c1.setVisible(true);
+							
+							
+				}
+			});
 			
 		menuBar.add(alumnos);
 	
@@ -86,7 +106,6 @@ class Ventana extends JFrame{
 		a.setSize(534, 338);
 		a.setTitle("Altas alumnos");
 		//bd.setVisible(true);
-		
 		
 		
 		panel1 = new JPanel();
@@ -194,7 +213,7 @@ class Ventana extends JFrame{
 		panel2.setBackground(new Color(237,234,227));
 		panel2.setLayout(gbl);
 		Border bordejpanel2 = new TitledBorder(new EtchedBorder());
-		panel2.setBorder(bordejpanel);
+		panel2.setBorder(bordejpanel2);
 		panel2.setBounds(1, 1, 523, 304);
 		
 		JLabel lblNumControl2 = new JLabel("Numero de control: ");
@@ -224,14 +243,12 @@ class Ventana extends JFrame{
 		
 		JLabel lblSemestre2 = new JLabel("Semestre: ");
 		componentePanel(lblSemestre2, 0, 5, 1, 1, panel2);
-		String sem2[] = {"Elige semestre...","1","2","3","4","5","6","7","8","9","10"};
-		JComboBox <String> cmbSemestre2 = new JComboBox<String>(sem2);
+		JComboBox <String> cmbSemestre2 = new JComboBox<String>(sem);
 		componentePanel(cmbSemestre2, 1, 5, 1, 1, panel2);
 		
 		JLabel lblCarrera2 = new JLabel("Carrera: ");
 		componentePanel(lblCarrera2, 0, 6, 1, 1, panel2);
-		String carrera2[] = {"Elige carrera...","ISC","IM","IIA","LA","CP"};
-		JComboBox <String> cmbCarrera2 = new JComboBox<String>(carrera2);
+		JComboBox <String> cmbCarrera2 = new JComboBox<String>(carrera);
 		componentePanel(cmbCarrera2, 1, 6, 1, 1, panel2);
 		
 		JButton btnBuscar = new JButton("Buscar");
@@ -241,13 +258,13 @@ class Ventana extends JFrame{
 		btnBorrar2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				txtNumControl.setText("");
-				txtNombres.setText("");
-				txtApPaterno.setText("");
-				txtApMaterno.setText("");
-				txtEdad.setText("");
-				cmbSemestre.setSelectedItem("Elige semestre...");
-				cmbCarrera.setSelectedItem("Elige carrera...");
+				txtNumControl2.setText("");
+				txtNombres2.setText("");
+				txtApPaterno2.setText("");
+				txtApMaterno2.setText("");
+				txtEdad2.setText("");
+				cmbSemestre2.setSelectedItem("Elige semestre...");
+				cmbCarrera2.setSelectedItem("Elige carrera...");
 			}
 		});
 		componentePanel(btnBorrar2, 3, 0, 1, 1, panel2);
@@ -264,14 +281,101 @@ class Ventana extends JFrame{
 		});
 		componentePanel(btnCancelar2, 3, 5, 1, 1, panel2);
 		
-		//JTable tabla2 = new JTable(6, 6);
-		//componentePanel(tabla, 0, 7, 4, 1, panel2);
+		JTable tabla2 = new JTable(6, 6);
+		componentePanel(tabla2, 0, 7, 4, 1, panel2);
 
 		b.add(panel2);
-		//---------------------------------------------------------------------------------
+		//----------------------------------Cambios--------------------------------------------
 		
+		c = new JInternalFrame();
+		c.getContentPane().setLayout(null);
+		c.setDefaultCloseOperation(HIDE_ON_CLOSE);
+		c.setSize(534, 338);
+		c.setTitle("Cambios alumnos");
+	
+		panel3 = new JPanel();
+		panel3.setBackground(new Color(237,234,227));
+		panel3.setLayout(gbl);
+		Border bordejpanel3 = new TitledBorder(new EtchedBorder());
+		panel3.setBorder(bordejpanel3);
+		panel3.setBounds(1, 1, 523, 304);
+		
+		JLabel lblNumControl3 = new JLabel("Numero de control: ");
+		componentePanel(lblNumControl3, 0, 0, 1, 1, panel3);
+		JTextField txtNumControl3 = new JTextField(10);
+		componentePanel(txtNumControl3, 1, 0, 1, 1, panel3);
+		
+		JLabel lblNombres3 = new JLabel("Nombres: ");
+		componentePanel(lblNombres3, 0, 1, 1, 1, panel3);
+		JTextField txtNombres3 = new JTextField(16);
+		componentePanel(txtNombres3, 1, 1, 2, 1, panel3);
+		
+		JLabel lblApPaterno3 = new JLabel("Apellido paterno: ");
+		componentePanel(lblApPaterno3, 0, 2, 1, 1, panel3);
+		JTextField txtApPaterno3 = new JTextField(16);
+		componentePanel(txtApPaterno3, 1, 2, 2, 1, panel3);
+		
+		JLabel lblApMaterno3 = new JLabel("Apellido materno: ");
+		componentePanel(lblApMaterno3, 0, 3, 1, 1, panel3);
+		JTextField txtApMaterno3 = new JTextField(16);
+		componentePanel(txtApMaterno3, 1, 3, 2, 1, panel3);
+		
+		JLabel lblEdad3 = new JLabel("Edad: ");
+		componentePanel(lblEdad3, 0, 4, 1, 1, panel3);
+		JTextField txtEdad3 = new JTextField(10);
+		componentePanel(txtEdad3, 1, 4, 2, 1, panel3);
+		
+		JLabel lblSemestre3 = new JLabel("Semestre: ");
+		componentePanel(lblSemestre3, 0, 5, 1, 1, panel3);
+		JComboBox <String> cmbSemestre3 = new JComboBox<String>(sem);
+		componentePanel(cmbSemestre3, 1, 5, 1, 1, panel3);
+		
+		JLabel lblCarrera3 = new JLabel("Carrera: ");
+		componentePanel(lblCarrera3, 0, 6, 1, 1, panel3);
+		JComboBox <String> cmbCarrera3 = new JComboBox<String>(carrera);
+		componentePanel(cmbCarrera3, 1, 6, 1, 1, panel3);
+		
+		JButton btnBuscar3 = new JButton("Buscar");
+		componentePanel(btnBuscar3, 2, 0, 1, 1, panel3);
+		
+		JButton btnBorrar3 = new JButton("Borrar");
+		btnBorrar2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				txtNumControl3.setText("");
+				txtNombres3.setText("");
+				txtApPaterno3.setText("");
+				txtApMaterno3.setText("");
+				txtEdad3.setText("");
+				cmbSemestre3.setSelectedItem("Elige semestre...");
+				cmbCarrera3.setSelectedItem("Elige carrera...");
+			}
+		});
+		componentePanel(btnBorrar3, 3, 0, 1, 1, panel3);
+		
+		JButton btnAgregar3 = new JButton("Guardar cambios");
+		componentePanel(btnAgregar3, 3, 2, 1, 1, panel3);
+		
+		JButton btnCancelar3 = new JButton("Cancelar");
+		btnCancelar3.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false);
+			}
+		});
+		componentePanel(btnCancelar3, 3, 5, 1, 1, panel3);
+		
+		JTable tabla3 = new JTable(6, 6);
+		componentePanel(tabla3, 0, 7, 4, 1, panel3);
+
+		c.add(panel3);
+		
+		//----------------------------------Consultas----------------------------------------
+		
+		//-----------------------------------------------------------------------------------
 		dp.add(a);
 		dp.add(b);
+		dp.add(c);
 		dp.setBounds(0, 0, 550, 400);
 		add(dp);
 		
