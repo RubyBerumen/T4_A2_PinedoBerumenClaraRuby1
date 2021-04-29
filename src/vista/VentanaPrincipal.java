@@ -212,8 +212,7 @@ class Ventana extends JFrame{
 		panel2 = new JPanel();
 		panel2.setBackground(new Color(237,234,227));
 		panel2.setLayout(gbl);
-		Border bordejpanel2 = new TitledBorder(new EtchedBorder());
-		panel2.setBorder(bordejpanel2);
+		panel2.setBorder(bordejpanel);
 		panel2.setBounds(1, 1, 523, 304);
 		
 		JLabel lblNumControl2 = new JLabel("Numero de control: ");
@@ -296,8 +295,7 @@ class Ventana extends JFrame{
 		panel3 = new JPanel();
 		panel3.setBackground(new Color(237,234,227));
 		panel3.setLayout(gbl);
-		Border bordejpanel3 = new TitledBorder(new EtchedBorder());
-		panel3.setBorder(bordejpanel3);
+		panel3.setBorder(bordejpanel);
 		panel3.setBounds(1, 1, 523, 304);
 		
 		JLabel lblNumControl3 = new JLabel("Numero de control: ");
@@ -372,10 +370,94 @@ class Ventana extends JFrame{
 		
 		//----------------------------------Consultas----------------------------------------
 		
+		c1 = new JInternalFrame();
+		c1.getContentPane().setLayout(null);
+		c1.setDefaultCloseOperation(HIDE_ON_CLOSE);
+		c1.setSize(534, 338);
+		c1.setTitle("Consultas alumnos");
+	
+		panel4 = new JPanel();
+		panel4.setBackground(new Color(237,234,227));
+		panel4.setLayout(gbl);
+		panel4.setBorder(bordejpanel);
+		panel4.setBounds(1, 1, 523, 304);
+		
+		ButtonGroup bg = new ButtonGroup();
+		
+		JRadioButton rbNumControl = new JRadioButton("Numero de control: ");
+		componentePanel(rbNumControl, 1, 0, 1, 1, panel4);
+		JTextField txtNumControl4 = new JTextField(10);
+		componentePanel(txtNumControl4, 2, 0, 1, 1, panel4);
+		
+		JRadioButton rbTodos= new JRadioButton("Todos");
+		componentePanel(rbTodos, 0, 0, 1, 1, panel4);
+		
+		JRadioButton rbNombres = new JRadioButton("Nombres: ");
+		componentePanel(rbNombres, 1, 1, 1, 1, panel4);
+		JTextField txtNombres4 = new JTextField(10);
+		componentePanel(txtNombres4, 2, 1, 1, 1, panel4);
+		
+		JRadioButton rbApPaterno = new JRadioButton("Apellido paterno: ");
+		componentePanel(rbApPaterno, 1, 2, 1, 1, panel4);
+		JTextField txtApPaterno4 = new JTextField(10);
+		componentePanel(txtApPaterno4, 2, 2, 1, 1, panel4);
+		
+		JRadioButton rbApMaterno = new JRadioButton("Apellido materno: ");
+		componentePanel(rbApMaterno, 1, 3, 1, 1, panel4);
+		JTextField txtApMaterno4 = new JTextField(10);
+		componentePanel(txtApMaterno4, 2, 3, 1, 1, panel4);
+		
+		JRadioButton rbEdad = new JRadioButton("Edad: ");
+		componentePanel(rbEdad, 1, 4, 1, 1, panel4);
+		JTextField txtEdad4 = new JTextField(10);
+		componentePanel(txtEdad4, 2, 4, 1, 1, panel4);
+		
+		JRadioButton rbSemestre = new JRadioButton("Semestre: ");
+		componentePanel(rbSemestre, 1, 5, 1, 1, panel4);
+		JComboBox <String> cmbSemestre4 = new JComboBox<String>(sem);
+		componentePanel(cmbSemestre4, 2, 5, 1, 1, panel4);
+		
+		JRadioButton rbCarrera = new JRadioButton("Carrera: ");
+		componentePanel(rbCarrera, 1, 6, 1, 1, panel4);
+		JComboBox <String> cmbCarrera4 = new JComboBox<String>(carrera);
+		componentePanel(cmbCarrera4, 2, 6, 1, 1, panel4);
+		
+		JButton btnBuscar4 = new JButton("Buscar");
+		componentePanel(btnBuscar4, 3, 0, 1, 1, panel4);
+		
+		JButton btnBorrar4 = new JButton("Borrar");
+		btnBorrar2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				txtNumControl3.setText("");
+				txtNombres3.setText("");
+				txtApPaterno3.setText("");
+				txtApMaterno3.setText("");
+				txtEdad3.setText("");
+				cmbSemestre3.setSelectedItem("Elige semestre...");
+				cmbCarrera3.setSelectedItem("Elige carrera...");
+			}
+		});
+		componentePanel(btnBorrar4, 3, 2, 1, 1, panel4);
+		
+		JButton btnCancelar4 = new JButton("Cancelar");
+		btnCancelar4.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false);
+			}
+		});
+		componentePanel(btnCancelar4, 3, 4, 1, 1, panel4);
+		
+		JTable tabla4 = new JTable(6, 6);
+		componentePanel(tabla4, 0, 7, 4, 1, panel4);
+		
+		c1.add(panel4);
 		//-----------------------------------------------------------------------------------
 		dp.add(a);
 		dp.add(b);
 		dp.add(c);
+		dp.add(c1);
 		dp.setBounds(0, 0, 550, 400);
 		add(dp);
 		
