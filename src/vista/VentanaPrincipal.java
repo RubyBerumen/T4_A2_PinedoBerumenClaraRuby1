@@ -260,9 +260,9 @@ class Ventana extends JFrame{
 		});
 		componentePanel(btnCancelar, 2, 5, 1, 1, panel1);
 		
-		
+		/*
 		tablaA = new JTable(6,6);
-		componentePanel(tablaA, 0, 7, 3, 1, panel1);
+		componentePanel(tablaA, 0, 7, 3, 1, panel1); */
 		
 		a.add(panel1);
 		
