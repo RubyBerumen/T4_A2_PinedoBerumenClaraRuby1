@@ -4,6 +4,8 @@ import modelo.Alumno;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -24,9 +26,15 @@ class Ventana extends JFrame{
 	
 	JInternalFrame a,b,c,c1;
 	
+	JTable tablaA,tablaB,tablaC,tablaC1;
+	
+	
+	String controlador = "com.mysql.cj.jdbc.Driver";
+	String url = "jdbc:mysql://localhost:3306/Escuela_Topicos";
+	String consulta = "SELECT * FROM alumnos";
+	
 	GridBagLayout gbl = new GridBagLayout();
 	GridBagConstraints gbc = new GridBagConstraints();
-	
 	
 	public Ventana() {
 		getContentPane().setLayout(null);
@@ -54,9 +62,27 @@ class Ventana extends JFrame{
 				
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				a.setVisible(true);
 							
-							
+				ResultSetTable modeloDatos = null;
+				try {
+					modeloDatos = new ResultSetTable(controlador, url, consulta);
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
+				/*tablaA = new JTable(modeloDatos);
+				JScrollPane sp = new JScrollPane(tablaA);
+				sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+				
+				componentePanel(sp, 0, 7, 3, 1, panel1);*/
+				
+				
+				a.setVisible(true);	
+				b.setVisible(false);
+				c.setVisible(false);
+				c1.setVisible(false);
 				}
 			});
 		
@@ -64,19 +90,44 @@ class Ventana extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				ResultSetTable modeloDatos = null;
+				try {
+					modeloDatos = new ResultSetTable(controlador, url, consulta);
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				//tablaB.setModel(modeloDatos);
+				
 				b.setVisible(true);
-							
-							
+				a.setVisible(false);
+				c.setVisible(false);
+				c1.setVisible(false);
 				}
 			});
+		
 		
 		cambios.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				ResultSetTable modeloDatos = null;
+				try {
+					modeloDatos = new ResultSetTable(controlador, url, consulta);
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				//tablaC.setModel(modeloDatos);
+				
 				c.setVisible(true);
-							
-							
+				a.setVisible(false);
+				b.setVisible(false);
+				c1.setVisible(false);
 				}
 			});
 		
@@ -84,9 +135,21 @@ class Ventana extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				c1.setVisible(true);
-							
-							
+				
+				ResultSetTable modeloDatos = null;
+				try {
+					modeloDatos = new ResultSetTable(controlador, url, consulta);
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				//tablaC1.setModel(modeloDatos);			
+				
+				c1.setVisible(true);	
+				a.setVisible(false);
+				b.setVisible(false);
+				c.setVisible(false);
 				}
 			});
 			
@@ -192,13 +255,14 @@ class Ventana extends JFrame{
 		btnCancelar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				setVisible(false);
+				a.setVisible(false);
 			}
 		});
 		componentePanel(btnCancelar, 2, 5, 1, 1, panel1);
 		
-		JTable tabla = new JTable(7, 6);
-		componentePanel(tabla, 0, 7, 3, 1, panel1);
+		
+		tablaA = new JTable(6,6);
+		componentePanel(tablaA, 0, 7, 3, 1, panel1);
 		
 		a.add(panel1);
 		
@@ -223,31 +287,37 @@ class Ventana extends JFrame{
 		JLabel lblNombres2 = new JLabel("Nombres: ");
 		componentePanel(lblNombres2, 0, 1, 1, 1, panel2);
 		JTextField txtNombres2 = new JTextField(16);
+		txtNombres2.setEditable(false);
 		componentePanel(txtNombres2, 1, 1, 2, 1, panel2);
 		
 		JLabel lblApPaterno2 = new JLabel("Apellido paterno: ");
 		componentePanel(lblApPaterno2, 0, 2, 1, 1, panel2);
 		JTextField txtApPaterno2 = new JTextField(16);
+		txtApPaterno2.setEditable(false);
 		componentePanel(txtApPaterno2, 1, 2, 2, 1, panel2);
 		
 		JLabel lblApMaterno2 = new JLabel("Apellido materno: ");
 		componentePanel(lblApMaterno2, 0, 3, 1, 1, panel2);
 		JTextField txtApMaterno2 = new JTextField(16);
+		txtApMaterno2.setEditable(false);
 		componentePanel(txtApMaterno2, 1, 3, 2, 1, panel2);
 		
 		JLabel lblEdad2 = new JLabel("Edad: ");
 		componentePanel(lblEdad2, 0, 4, 1, 1, panel2);
 		JTextField txtEdad2 = new JTextField(10);
+		txtEdad2.setEditable(false);
 		componentePanel(txtEdad2, 1, 4, 2, 1, panel2);
 		
 		JLabel lblSemestre2 = new JLabel("Semestre: ");
 		componentePanel(lblSemestre2, 0, 5, 1, 1, panel2);
 		JComboBox <String> cmbSemestre2 = new JComboBox<String>(sem);
+		cmbSemestre2.setEditable(false);
 		componentePanel(cmbSemestre2, 1, 5, 1, 1, panel2);
 		
 		JLabel lblCarrera2 = new JLabel("Carrera: ");
 		componentePanel(lblCarrera2, 0, 6, 1, 1, panel2);
 		JComboBox <String> cmbCarrera2 = new JComboBox<String>(carrera);
+		cmbCarrera2.setEditable(false);
 		componentePanel(cmbCarrera2, 1, 6, 1, 1, panel2);
 		
 		JButton btnBuscar = new JButton("Buscar");
@@ -269,19 +339,35 @@ class Ventana extends JFrame{
 		componentePanel(btnBorrar2, 3, 0, 1, 1, panel2);
 		
 		JButton btnAgregar2 = new JButton("Eliminar");
+		btnAgregar2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String nc = txtNumControl2.getText();
+				AlumnoDAO aDAO = new AlumnoDAO();
+				
+				//System.out.println(aDAO.eliminarRegistro(nc)?"Exito":"Error");
+				
+				if(aDAO.eliminarRegistro(nc)) {
+					JOptionPane.showMessageDialog(rootPane, "Se eliminó correctamente de la base de datos");
+				}else {
+					JOptionPane.showMessageDialog(rootPane, "Hubo un error al intentar eliminar de la base de datos");
+				}
+			}
+			
+		});
 		componentePanel(btnAgregar2, 3, 2, 1, 1, panel2);
 		
 		JButton btnCancelar2 = new JButton("Cancelar");
-		btnCancelar.addActionListener(new ActionListener() {
+		btnCancelar2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				setVisible(false);
+				b.setVisible(false);
 			}
 		});
 		componentePanel(btnCancelar2, 3, 5, 1, 1, panel2);
 		
-		JTable tabla2 = new JTable(6, 6);
-		componentePanel(tabla2, 0, 7, 4, 1, panel2);
+		tablaB = new JTable(6, 6);
+		componentePanel(tablaB, 0, 7, 4, 1, panel2);
 
 		b.add(panel2);
 		//----------------------------------Cambios--------------------------------------------
@@ -337,7 +423,7 @@ class Ventana extends JFrame{
 		componentePanel(btnBuscar3, 2, 0, 1, 1, panel3);
 		
 		JButton btnBorrar3 = new JButton("Borrar");
-		btnBorrar2.addActionListener(new ActionListener() {
+		btnBorrar3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				txtNumControl3.setText("");
@@ -358,13 +444,13 @@ class Ventana extends JFrame{
 		btnCancelar3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				setVisible(false);
+				c.setVisible(false);
 			}
 		});
 		componentePanel(btnCancelar3, 3, 5, 1, 1, panel3);
 		
-		JTable tabla3 = new JTable(6, 6);
-		componentePanel(tabla3, 0, 7, 4, 1, panel3);
+		tablaC = new JTable(6, 6);
+		componentePanel(tablaC, 0, 7, 4, 1, panel3);
 
 		c.add(panel3);
 		
@@ -385,48 +471,56 @@ class Ventana extends JFrame{
 		ButtonGroup bg = new ButtonGroup();
 		
 		JRadioButton rbNumControl = new JRadioButton("Numero de control: ");
+		bg.add(rbNumControl);
 		componentePanel(rbNumControl, 1, 0, 1, 1, panel4);
 		JTextField txtNumControl4 = new JTextField(10);
 		componentePanel(txtNumControl4, 2, 0, 1, 1, panel4);
 		
 		JRadioButton rbTodos= new JRadioButton("Todos");
+		bg.add(rbTodos);
 		componentePanel(rbTodos, 0, 0, 1, 1, panel4);
 		
 		JRadioButton rbNombres = new JRadioButton("Nombres: ");
+		bg.add(rbNombres);
 		componentePanel(rbNombres, 1, 1, 1, 1, panel4);
 		JTextField txtNombres4 = new JTextField(10);
 		componentePanel(txtNombres4, 2, 1, 1, 1, panel4);
 		
 		JRadioButton rbApPaterno = new JRadioButton("Apellido paterno: ");
+		bg.add(rbApPaterno);
 		componentePanel(rbApPaterno, 1, 2, 1, 1, panel4);
 		JTextField txtApPaterno4 = new JTextField(10);
 		componentePanel(txtApPaterno4, 2, 2, 1, 1, panel4);
 		
 		JRadioButton rbApMaterno = new JRadioButton("Apellido materno: ");
+		bg.add(rbApMaterno);
 		componentePanel(rbApMaterno, 1, 3, 1, 1, panel4);
 		JTextField txtApMaterno4 = new JTextField(10);
 		componentePanel(txtApMaterno4, 2, 3, 1, 1, panel4);
 		
 		JRadioButton rbEdad = new JRadioButton("Edad: ");
+		bg.add(rbEdad);
 		componentePanel(rbEdad, 1, 4, 1, 1, panel4);
 		JTextField txtEdad4 = new JTextField(10);
 		componentePanel(txtEdad4, 2, 4, 1, 1, panel4);
 		
 		JRadioButton rbSemestre = new JRadioButton("Semestre: ");
+		bg.add(rbSemestre);
 		componentePanel(rbSemestre, 1, 5, 1, 1, panel4);
 		JComboBox <String> cmbSemestre4 = new JComboBox<String>(sem);
 		componentePanel(cmbSemestre4, 2, 5, 1, 1, panel4);
 		
 		JRadioButton rbCarrera = new JRadioButton("Carrera: ");
+		bg.add(rbCarrera);
 		componentePanel(rbCarrera, 1, 6, 1, 1, panel4);
 		JComboBox <String> cmbCarrera4 = new JComboBox<String>(carrera);
 		componentePanel(cmbCarrera4, 2, 6, 1, 1, panel4);
 		
 		JButton btnBuscar4 = new JButton("Buscar");
-		componentePanel(btnBuscar4, 3, 0, 1, 1, panel4);
+		componentePanel(btnBuscar4, 3, 1, 1, 1, panel4);
 		
 		JButton btnBorrar4 = new JButton("Borrar");
-		btnBorrar2.addActionListener(new ActionListener() {
+		btnBorrar4.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				txtNumControl3.setText("");
@@ -438,22 +532,25 @@ class Ventana extends JFrame{
 				cmbCarrera3.setSelectedItem("Elige carrera...");
 			}
 		});
-		componentePanel(btnBorrar4, 3, 2, 1, 1, panel4);
+		componentePanel(btnBorrar4, 3, 3, 1, 1, panel4);
 		
 		JButton btnCancelar4 = new JButton("Cancelar");
 		btnCancelar4.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				setVisible(false);
+				c1.setVisible(false);
 			}
 		});
-		componentePanel(btnCancelar4, 3, 4, 1, 1, panel4);
+		componentePanel(btnCancelar4, 3, 5, 1, 1, panel4);
 		
-		JTable tabla4 = new JTable(6, 6);
-		componentePanel(tabla4, 0, 7, 4, 1, panel4);
+		tablaC1 = new JTable(6,6);
+		//JScrollPane scrollPane = new JScrollPane(tabla4);
+		componentePanel(tablaC1, 0, 7, 4, 1, panel4);
 		
 		c1.add(panel4);
 		//-----------------------------------------------------------------------------------
+		
+		
 		dp.add(a);
 		dp.add(b);
 		dp.add(c);
@@ -474,7 +571,19 @@ class Ventana extends JFrame{
 		panel.add(c);
 		
 	}
+	
+	public void acualizarTabla(String cont, String ur, String cons, JTable tab, JInternalFrame inF ) {
+		ResultSetTable modeloDatos = null;
+		try {
+			modeloDatos = new ResultSetTable(cont, ur, cons);
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
+		
+		inF.setVisible(true);	
+	}
 	
 }
 
@@ -495,7 +604,7 @@ public class VentanaPrincipal {
 		System.out.println(aDAO.eliminarRegistro(nc)?"Exito":"Error");
 		
 		Alumno a = new Alumno("S1907000", "Ruby", "Pinedo", "d", (byte)19, (byte)4, "IM");
-		System.out.println(aDAO.modificarRegistro(a)?"Exito":"Errorxd");
+		System.out.println(aDAO.modificarRegistro(a)?"Exito":"Error");
 		*/
 
 	}
